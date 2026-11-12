@@ -1,0 +1,35 @@
+# Models: one entry per LLM. The entry name is what `model:` in benchmark.yaml refers to.
+
+# vLLM: a model you serve yourself (also LM Studio, llama.cpp).
+vllm-gemma4-31b-it:
+  provider: vllm                 # vllm | ollama | anthropic | openai
+  model: gemma4-31b-it           # the name the server serves the model under
+  temperature: 0.1               # any number
+  max_tokens: 8192               # output limit, in tokens
+  # base_url: http://host:port   # server address; default: VLLM_BASE_URL in .env
+  # api_key_env: MY_API_KEY      # variable in .env holding the key; default: VLLM_API_KEY
+  # extra_body: {}               # extra request fields
+
+# Ollama: a model pulled with `ollama pull`.
+ollama-gemma4-12b:
+  provider: ollama
+  model: gemma4:12b              # the Ollama model tag
+  temperature: 0.1               # any number
+  max_tokens: 8192               # output limit, in tokens
+  num_ctx: 16384                 # context window, in tokens
+  # base_url: http://host:port   # server address; default: OLLAMA_BASE_URL in .env
+
+# API model: Claude. Needs ANTHROPIC_API_KEY in .env.
+claude-opus-5-5:
+  provider: anthropic
+  model: claude-opus-5-5         # claude-opus-5-5 | claude-sonnet-5-5 | claude-haiku-5-5 | claude-fable-5-1
+  max_tokens: 16000              # output limit, in tokens
+  effort: medium                 # low | medium | high | xhigh | max
+  fallbacks: default             # default (another Claude model answers if this one declines) | remove the line to turn off
+
+# API model: GPT. Needs OPENAI_API_KEY in .env.
+gpt-5:
+  provider: openai
+  model: gpt-5                   # any OpenAI chat model name
+  max_tokens: 16000              # output limit, in tokens
+  # temperature: 1               # any number; leave out for models that do not accept it

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decomplite"
+version = "0.1.0"
+description = "A playground for LLM-assisted decompilation with simple, configurable pipelines (x86-64, O0-Os)"
+requires-python = ">=3.9"
+dependencies = [
+    "pyyaml>=6",
+    "requests",
+    "pyelftools>=0.30",
+    # Locate / rename C functions when scoring against a test harness
+    # (compile_ok, test_passed).
+    "tree-sitter>=0.22,<0.23",
+    "tree-sitter-c==0.21.4",
+    # Claude models (provider: anthropic). Needs Python 3.10+.
+    "anthropic>=2; python_version >= '3.10'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+decomplite = "decomplite.cli:main"
+
+[tool.setuptools]
+packages = ["decomplite"]
+
+[tool.setuptools.package-data]
+decomplite = ["prompts/*.txt"]

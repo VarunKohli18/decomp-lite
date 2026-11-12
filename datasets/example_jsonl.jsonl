@@ -1,0 +1,2 @@
+{"name": "gcd", "source": "unsigned gcd(unsigned a, unsigned b)\n{\n    while (b) {\n        unsigned t = a % b;\n        a = b;\n        b = t;\n    }\n    return a;\n}\n", "test": "#include \"gcd.c\"\n\nint main(void)\n{\n    if (gcd(12, 18) != 6) return 1;\n    if (gcd(17, 5) != 1) return 2;\n    if (gcd(0, 9) != 9) return 3;\n    return 0;\n}\n"}
+{"name": "str_hash_djb2", "function": "hash", "source": "unsigned long hash(const char *s)\n{\n    unsigned long h = 5381;\n    while (*s)\n        h = h * 33 + (unsigned char)*s++;\n    return h;\n}\n"}

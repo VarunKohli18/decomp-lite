@@ -1,0 +1,7 @@
+# Functions: one entry per dataset.
+repos:
+  - name: example                # dataset name: datasets/<name>/, <name>.jsonl or <name>.py
+    path: datasets/example       # where the dataset is, if not under datasets/
+    functions: [sum_array, count_bits, reverse_string, clamp_scale]   # exact names
+    patterns: []                 # name patterns, e.g. ["sum_*"]; leave both empty to run everything
+    cflags: []                   # extra compiler flags, e.g. ["-Iinclude"]

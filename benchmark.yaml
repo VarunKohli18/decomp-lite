@@ -1,0 +1,23 @@
+# Target: what the functions are compiled for.
+archs: [x86_64]                  # x86_64
+opts: [O0, O1, O2, O3, Os]       # any of: O0 | O1 | O2 | O3 | Os
+compilers: [gcc]                 # gcc
+
+# Model: the LLM behind every role.
+model: vllm-gemma4-31b-it        # a name from models.yaml, or a list of names
+
+# Functions: which datasets and functions to run.
+functions_from: functions_example.yaml   # a file with a `repos:` list
+
+# Pipelines: how an answer is produced. One entry per pipeline; the name is yours.
+pipelines:
+  single_pass:
+    input: asm                   # asm | pseudoc | [asm, pseudoc]
+    recovery: 1                  # how many LLMs write an answer: 1 or more, or a list of model names
+    reviewers: 0                 # how many LLMs review it: 0 or more, or a list of model names
+    feedback: none               # none | compiler | interface | tests
+    iterations: 1                # 1 to 10
+
+# Report: where the summary is written.
+report:
+  out_dir: reports/              # any folder
